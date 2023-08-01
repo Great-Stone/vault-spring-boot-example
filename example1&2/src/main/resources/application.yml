@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: java_and_vault
+  cloud:
+    vault:
+      host: 127.0.0.1
+      port: 8200
+      scheme: http
+      config:
+        lifecycle:
+          enabled: false
+      authentication: TOKEN
+      token: root
+      # authentication: APPROLE
+      # app-role:
+      #   role-id: 53b96749-1234-fec1-05b8-760c29991d89
+      #   secret-id: aebbc4ac-79e4-c529-8751-c52f2f31a3d7
+      #   role: java-vault-prd
+      #   app-role-path: approle
+      kv:
+        enabled: true
+        backend: demo-app
+        profile-separator: '/'
+      generic:
+        enabled: false
+  config:
+    import: vault://
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/${spring.datasource.database}
